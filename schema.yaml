@@ -111,7 +111,7 @@ properties:
     type: object
     oneOf:
     - properties: {skip: {const: true}}
-    - required: [genomes_base, arriba_standalone_refs]
+    - required: [genomes_base]
     properties:
       skip:
         type: boolean
@@ -132,9 +132,26 @@ properties:
         type: path
         description: Path to rnafusion references
 
-      arriba_standalone_refs:
-        type: path
-        description: Path to references used by Arriba in standalone mode
+      arriba_standalone:
+        type: object
+        properties:
+          cytobands:
+            type: path
+            description: Arriba cytobands file for standalone visualisation (Autodetect from nf-core/rnafusion by default)
+          protein_domains:
+            type: path
+            description: Arriba protein domains file for standalone visualisation (Autodetect from nf-core/rnafusion by default)
+          annotation:
+            type: path
+            description: GTF annotation for Arriba standalone visualisation (Autodetect from nf-core/rnafusion by default)
+          threads:
+            type: integer
+            description: Nmber of threads for standalone Arriba visualsation (For samtools index and sort)
+            default: 12
+          init:
+            type: string
+            description: Code to run before Arriba standalone visualisation
+            default: ""
 
       tools_cutoff:
         type: integer
